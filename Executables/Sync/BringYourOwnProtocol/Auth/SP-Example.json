@@ -1,0 +1,8 @@
+{
+    "IDP" : 
+    {
+        "Name" : "OIDC-App1",
+        "Vendor" : "PaloAltoNetworks-IDIRA",
+        "Protocol" : "OIDC"
+    }
+}

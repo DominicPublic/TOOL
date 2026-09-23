@@ -1,0 +1,50 @@
+{
+    "IDP" : 
+    {
+        "Name" : "",
+        "Vendor" : "",
+        "Protocol" : "",
+        "identities" : 
+        {
+            "schemas" : 
+            {
+                "type1" : {},
+                "type2" : {}
+            },
+            "endpoint" : {}
+        },    
+        "access" : 
+        {
+            "schemas" : 
+            {
+                "type1" : {},
+                "type2" : {}
+            },
+            "endpoint" : {}
+        },
+        "token_endpoint" : 
+        {
+            "generation" : {},
+            "introspection" : {},
+            "revocation" : {},
+            "exchange" : {},
+            "config" : 
+            {
+                "lifetimes" : 
+                {
+                    "accesslifetime" : "",
+                    "graceperiodlifetime" : "",
+                    "validations" : {}
+                },
+                "format" : "",
+                "max_size" : "",
+                "min_size" : "",
+                "encryption" : {},
+                "signature" : {}
+            }
+        },
+        "auth_endpoint": {},
+        "encryption" : {},
+        "signature" : {}
+    }
+}
