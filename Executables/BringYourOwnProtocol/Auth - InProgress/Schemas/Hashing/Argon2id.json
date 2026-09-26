@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/hashing/argon2id.json",
+  "title": "Argon2id password hashing configuration",
+  "description": "Memory-hard password hashing configuration. Store the generated salt with each password hash.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "Argon2id" },
+    "version": { "const": 19 },
+    "memory_kib": { "type": "integer", "minimum": 19456, "maximum": 1048576 },
+    "iterations": { "type": "integer", "minimum": 2, "maximum": 10 },
+    "parallelism": { "type": "integer", "minimum": 1, "maximum": 16 },
+    "salt_bytes": { "type": "integer", "minimum": 16, "maximum": 64 },
+    "output_bytes": { "type": "integer", "minimum": 16, "maximum": 64 }
+  },
+  "required": ["algorithm", "version", "memory_kib", "iterations", "parallelism", "salt_bytes", "output_bytes"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "Argon2id", "version": 19, "memory_kib": 65536, "iterations": 3, "parallelism": 4, "salt_bytes": 16, "output_bytes": 32 }]
+}

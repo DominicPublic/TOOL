@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/authentication/radius.json",
+  "title": "RADIUS authentication configuration",
+  "description": "RADIUS client configuration. Protect shared secrets and prefer a protected transport where supported.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "RADIUS" },
+    "server": { "type": "string", "minLength": 1 },
+    "authentication_port": { "type": "integer", "const": 1812 },
+    "transport": { "type": "string", "enum": ["udp", "radsec"] },
+    "shared_secret_ref": { "type": "string", "minLength": 1 },
+    "eap_method": { "type": "string", "enum": ["EAP-TLS", "PEAP", "EAP-TTLS"] }
+  },
+  "required": ["protocol", "server", "authentication_port", "transport", "shared_secret_ref"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "RADIUS", "server": "radius.example.com", "authentication_port": 1812, "transport": "radsec", "shared_secret_ref": "vault://radius/client-secret", "eap_method": "EAP-TLS" }]
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/hashing/blake3.json",
+  "title": "BLAKE3 hashing configuration",
+  "description": "Configuration for the BLAKE3 cryptographic hash function.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "BLAKE3" },
+    "input_encoding": { "type": "string", "enum": ["utf-8", "base64", "hex"] },
+    "output_encoding": { "type": "string", "enum": ["base64url", "base64", "hex"] },
+    "output_bytes": { "type": "integer", "minimum": 1, "maximum": 65536 },
+    "key_ref": { "type": "string", "minLength": 1 }
+  },
+  "required": ["algorithm", "input_encoding", "output_encoding", "output_bytes"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "BLAKE3", "input_encoding": "utf-8", "output_encoding": "hex", "output_bytes": 32 }]
+}

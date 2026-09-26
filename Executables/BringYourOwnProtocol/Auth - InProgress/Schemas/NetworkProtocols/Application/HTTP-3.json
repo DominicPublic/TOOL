@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/http-3.json",
+  "title": "HTTP/3 service configuration",
+  "description": "HTTP/3 service configuration over QUIC with TLS 1.3.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "HTTP" },
+    "version": { "const": "3" },
+    "listen_address": { "type": "string", "minLength": 1 },
+    "udp_port": { "type": "integer", "minimum": 1, "maximum": 65535 },
+    "transport": { "const": "QUIC" },
+    "tls_minimum_version": { "const": "TLS1.3" },
+    "certificate_ref": { "type": "string", "minLength": 1 },
+    "maximum_concurrent_streams": { "type": "integer", "minimum": 1 }
+  },
+  "required": ["protocol", "version", "listen_address", "udp_port", "transport", "tls_minimum_version", "certificate_ref"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "HTTP", "version": "3", "listen_address": "0.0.0.0", "udp_port": 443, "transport": "QUIC", "tls_minimum_version": "TLS1.3", "certificate_ref": "vault://certs/web-server", "maximum_concurrent_streams": 100 }]
+}

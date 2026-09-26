@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/encryption/tls-1.3.json",
+  "title": "TLS 1.3 transport encryption configuration",
+  "description": "Transport-layer encryption policy using TLS 1.3 and authenticated peer verification.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "TLS" },
+    "minimum_version": { "const": "TLS1.3" },
+    "cipher_suites": { "type": "array", "items": { "type": "string", "enum": ["TLS_AES_128_GCM_SHA256", "TLS_AES_256_GCM_SHA384", "TLS_CHACHA20_POLY1305_SHA256"] }, "minItems": 1, "uniqueItems": true },
+    "verify_peer": { "const": true },
+    "trust_store_ref": { "type": "string", "minLength": 1 }
+  },
+  "required": ["protocol", "minimum_version", "cipher_suites", "verify_peer", "trust_store_ref"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "TLS", "minimum_version": "TLS1.3", "cipher_suites": ["TLS_AES_128_GCM_SHA256", "TLS_CHACHA20_POLY1305_SHA256"], "verify_peer": true, "trust_store_ref": "vault://trust/public-ca-bundle" }]
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/websocket.json",
+  "title": "WebSocket endpoint configuration",
+  "description": "WebSocket endpoint configuration, optionally secured with TLS (WSS).",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "WebSocket" },
+    "endpoint": { "type": "string", "format": "uri", "pattern": "^wss?://" },
+    "subprotocols": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "maximum_frame_bytes": { "type": "integer", "minimum": 1 },
+    "ping_interval_seconds": { "type": "integer", "minimum": 1 }
+  },
+  "required": ["protocol", "endpoint", "maximum_frame_bytes"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "WebSocket", "endpoint": "wss://stream.example.com/events", "subprotocols": ["events.v1"], "maximum_frame_bytes": 1048576, "ping_interval_seconds": 30 }]
+}

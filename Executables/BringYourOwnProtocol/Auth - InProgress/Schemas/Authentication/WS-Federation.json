@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/authentication/ws-federation.json",
+  "title": "WS-Federation relying-party configuration",
+  "description": "Configuration for a WS-Federation passive requestor relying party.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "WS-Federation" },
+    "issuer": { "type": "string", "format": "uri" },
+    "realm": { "type": "string", "minLength": 1 },
+    "reply_url": { "type": "string", "format": "uri" },
+    "wtrealm": { "type": "string", "minLength": 1 },
+    "signing_certificate_ref": { "type": "string", "minLength": 1 }
+  },
+  "required": ["protocol", "issuer", "realm", "reply_url", "wtrealm", "signing_certificate_ref"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "WS-Federation", "issuer": "https://sts.example.com", "realm": "https://app.example.com/", "reply_url": "https://app.example.com/signin-wsfed", "wtrealm": "https://app.example.com/", "signing_certificate_ref": "vault://certs/sts-signing" }]
+}

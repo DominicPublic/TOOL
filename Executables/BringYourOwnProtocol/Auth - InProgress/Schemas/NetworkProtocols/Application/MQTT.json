@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/mqtt.json",
+  "title": "MQTT client configuration",
+  "description": "MQTT publish/subscribe client configuration with TLS enabled.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "MQTT" },
+    "broker_uri": { "type": "string", "format": "uri", "pattern": "^mqtts?://" },
+    "version": { "type": "string", "enum": ["3.1.1", "5.0"] },
+    "client_id": { "type": "string", "minLength": 1 },
+    "tls_enabled": { "const": true },
+    "username_ref": { "type": "string", "minLength": 1 },
+    "password_ref": { "type": "string", "minLength": 1 },
+    "keep_alive_seconds": { "type": "integer", "minimum": 1 },
+    "maximum_qos": { "type": "integer", "enum": [0, 1, 2] }
+  },
+  "required": ["protocol", "broker_uri", "version", "client_id", "tls_enabled", "keep_alive_seconds", "maximum_qos"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "MQTT", "broker_uri": "mqtts://broker.example.com:8883", "version": "5.0", "client_id": "sensor-001", "tls_enabled": true, "username_ref": "vault://mqtt/username", "password_ref": "vault://mqtt/password", "keep_alive_seconds": 60, "maximum_qos": 1 }]
+}

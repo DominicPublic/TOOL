@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/pop3.json",
+  "title": "POP3 client configuration",
+  "description": "POP3 client configuration with TLS and certificate verification enabled.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "POP3" },
+    "host": { "type": "string", "minLength": 1 },
+    "port": { "type": "integer", "const": 995 },
+    "tls_mode": { "const": "implicit" },
+    "verify_certificate": { "const": true },
+    "username_ref": { "type": "string", "minLength": 1 },
+    "password_ref": { "type": "string", "minLength": 1 }
+  },
+  "required": ["protocol", "host", "port", "tls_mode", "verify_certificate", "username_ref", "password_ref"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "POP3", "host": "mail.example.com", "port": 995, "tls_mode": "implicit", "verify_certificate": true, "username_ref": "vault://mail/username", "password_ref": "vault://mail/password" }]
+}

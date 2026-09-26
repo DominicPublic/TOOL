@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/signatures/jws.json",
+  "title": "JSON Web Signature configuration",
+  "description": "Signing configuration for compact or detached JSON Web Signatures.",
+  "type": "object",
+  "properties": {
+    "format": { "const": "JWS" },
+    "algorithm": { "type": "string", "enum": ["ES256", "ES384", "ES512", "EdDSA", "RS256", "RS384", "RS512", "PS256", "PS384", "PS512"] },
+    "key_ref": { "type": "string", "minLength": 1 },
+    "serialization": { "type": "string", "enum": ["compact", "general-json", "flattened-json"] },
+    "detached_payload": { "type": "boolean" }
+  },
+  "required": ["format", "algorithm", "key_ref", "serialization", "detached_payload"],
+  "additionalProperties": false,
+  "examples": [{ "format": "JWS", "algorithm": "EdDSA", "key_ref": "vault://keys/signing-private", "serialization": "compact", "detached_payload": false }]
+}

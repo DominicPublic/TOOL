@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/signatures/ed25519.json",
+  "title": "Ed25519 signature configuration",
+  "description": "Configuration for digital signatures using Ed25519.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "Ed25519" },
+    "private_key_ref": { "type": "string", "minLength": 1 },
+    "public_key_ref": { "type": "string", "minLength": 1 },
+    "encoding": { "type": "string", "enum": ["base64url", "base64", "hex"] }
+  },
+  "required": ["algorithm", "private_key_ref", "public_key_ref", "encoding"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "Ed25519", "private_key_ref": "vault://keys/signing-private", "public_key_ref": "vault://keys/signing-public", "encoding": "base64url" }]
+}

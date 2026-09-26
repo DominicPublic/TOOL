@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/ftp.json",
+  "title": "FTP over explicit TLS configuration",
+  "description": "Legacy FTP configuration restricted to explicit TLS (FTPS); prefer SFTP where practical.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "FTP" },
+    "mode": { "const": "explicit-tls" },
+    "host": { "type": "string", "minLength": 1 },
+    "port": { "type": "integer", "const": 21 },
+    "username_ref": { "type": "string", "minLength": 1 },
+    "password_ref": { "type": "string", "minLength": 1 },
+    "verify_certificate": { "const": true },
+    "passive_mode": { "type": "boolean" }
+  },
+  "required": ["protocol", "mode", "host", "port", "username_ref", "password_ref", "verify_certificate"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "FTP", "mode": "explicit-tls", "host": "files.example.com", "port": 21, "username_ref": "vault://ftp/user", "password_ref": "vault://ftp/password", "verify_certificate": true, "passive_mode": true }]
+}

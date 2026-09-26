@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/authentication/oauth2.json",
+  "title": "OAuth 2.0 authorization configuration",
+  "description": "OAuth 2.0 authorization-code client configuration. OAuth 2.0 delegates authorization; use OpenID Connect when an identity assertion is required.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "OAuth2" },
+    "authorization_endpoint": { "type": "string", "format": "uri" },
+    "token_endpoint": { "type": "string", "format": "uri" },
+    "client_id": { "type": "string", "minLength": 1 },
+    "client_secret_ref": { "type": "string", "minLength": 1 },
+    "redirect_uri": { "type": "string", "format": "uri" },
+    "grant_type": { "const": "authorization_code" },
+    "scopes": { "type": "array", "items": { "type": "string" } },
+    "use_pkce": { "const": true }
+  },
+  "required": ["protocol", "authorization_endpoint", "token_endpoint", "client_id", "redirect_uri", "grant_type", "scopes", "use_pkce"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "OAuth2", "authorization_endpoint": "https://auth.example.com/authorize", "token_endpoint": "https://auth.example.com/token", "client_id": "sample-client", "redirect_uri": "https://app.example.com/oauth/callback", "grant_type": "authorization_code", "scopes": ["documents.read"], "use_pkce": true }]
+}

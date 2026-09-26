@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/hashing/sha-224.json",
+  "title": "SHA-224 hashing configuration",
+  "description": "Configuration for the SHA-224 cryptographic hash function. This is not a password-hashing scheme.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "SHA-224" },
+    "input_encoding": { "type": "string", "enum": ["utf-8", "base64", "hex"] },
+    "output_encoding": { "type": "string", "enum": ["base64url", "base64", "hex"] }
+  },
+  "required": ["algorithm", "input_encoding", "output_encoding"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "SHA-224", "input_encoding": "utf-8", "output_encoding": "hex" }]
+}

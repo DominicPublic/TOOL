@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/dns-over-tls.json",
+  "title": "DNS-over-TLS resolver configuration",
+  "description": "Encrypted DNS resolver connection using DNS-over-TLS.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "DNS-over-TLS" },
+    "resolver_host": { "type": "string", "minLength": 1 },
+    "port": { "type": "integer", "const": 853 },
+    "verify_certificate": { "const": true },
+    "server_name": { "type": "string", "minLength": 1 },
+    "trust_store_ref": { "type": "string", "minLength": 1 },
+    "dnssec_validation": { "type": "boolean" }
+  },
+  "required": ["protocol", "resolver_host", "port", "verify_certificate", "server_name"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "DNS-over-TLS", "resolver_host": "dns.example.net", "port": 853, "verify_certificate": true, "server_name": "dns.example.net", "trust_store_ref": "vault://trust/public-ca-bundle", "dnssec_validation": true }]
+}

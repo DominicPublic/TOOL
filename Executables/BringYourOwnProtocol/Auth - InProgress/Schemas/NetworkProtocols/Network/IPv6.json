@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/ipv6.json",
+  "title": "IPv6 interface configuration",
+  "description": "Representative IPv6 interface addressing configuration.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "IPv6" },
+    "address_mode": { "type": "string", "enum": ["static", "slaac", "dhcpv6"] },
+    "addresses": { "type": "array", "items": { "type": "object", "properties": { "address": { "type": "string", "format": "ipv6" }, "prefix_length": { "type": "integer", "minimum": 0, "maximum": 128 } }, "required": ["address", "prefix_length"], "additionalProperties": false } },
+    "gateway": { "type": "string", "format": "ipv6" },
+    "dns_resolvers": { "type": "array", "items": { "type": "string", "format": "ipv6" } },
+    "mtu": { "type": "integer", "minimum": 1280, "maximum": 9000 }
+  },
+  "required": ["protocol", "address_mode"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "IPv6", "address_mode": "static", "addresses": [{ "address": "2001:db8::10", "prefix_length": 64 }], "gateway": "2001:db8::1", "dns_resolvers": ["2001:db8::53"], "mtu": 1500 }]
+}

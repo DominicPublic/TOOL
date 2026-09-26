@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/amqp.json",
+  "title": "AMQP client configuration",
+  "description": "AMQP broker connection configuration with TLS certificate verification.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "AMQP" },
+    "broker_uri": { "type": "string", "format": "uri", "pattern": "^amqps?://" },
+    "version": { "type": "string", "enum": ["0-9-1", "1.0"] },
+    "virtual_host": { "type": "string", "minLength": 1 },
+    "username_ref": { "type": "string", "minLength": 1 },
+    "password_ref": { "type": "string", "minLength": 1 },
+    "verify_certificate": { "const": true },
+    "heartbeat_seconds": { "type": "integer", "minimum": 0 }
+  },
+  "required": ["protocol", "broker_uri", "version", "virtual_host", "verify_certificate"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "AMQP", "broker_uri": "amqps://broker.example.com:5671", "version": "0-9-1", "virtual_host": "/production", "username_ref": "vault://amqp/username", "password_ref": "vault://amqp/password", "verify_certificate": true, "heartbeat_seconds": 30 }]
+}

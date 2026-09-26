@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/authentication/http-digest.json",
+  "title": "HTTP Digest authentication configuration",
+  "description": "Legacy HTTP Digest configuration. Prefer modern challenge-response protocols and TLS-protected authentication where possible.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "HTTP-Digest" },
+    "realm": { "type": "string", "minLength": 1 },
+    "algorithm": { "type": "string", "enum": ["SHA-256", "MD5"] },
+    "quality_of_protection": { "type": "string", "enum": ["auth", "auth-int"] },
+    "credential_ref": { "type": "string", "minLength": 1 },
+    "nonce_lifetime_seconds": { "type": "integer", "minimum": 1 }
+  },
+  "required": ["protocol", "realm", "algorithm", "quality_of_protection", "credential_ref", "nonce_lifetime_seconds"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "HTTP-Digest", "realm": "example-service", "algorithm": "SHA-256", "quality_of_protection": "auth", "credential_ref": "vault://service/digest-credentials", "nonce_lifetime_seconds": 300 }]
+}

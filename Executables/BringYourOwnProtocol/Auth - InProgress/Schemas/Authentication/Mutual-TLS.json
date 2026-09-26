@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/authentication/mutual-tls.json",
+  "title": "Mutual TLS authentication configuration",
+  "description": "Client certificate authentication with peer certificate verification enabled.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "Mutual-TLS" },
+    "client_certificate_ref": { "type": "string", "minLength": 1 },
+    "client_private_key_ref": { "type": "string", "minLength": 1 },
+    "trusted_ca_refs": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 },
+    "verify_peer": { "const": true },
+    "minimum_tls_version": { "type": "string", "enum": ["TLS1.2", "TLS1.3"] }
+  },
+  "required": ["protocol", "client_certificate_ref", "client_private_key_ref", "trusted_ca_refs", "verify_peer", "minimum_tls_version"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "Mutual-TLS", "client_certificate_ref": "vault://certs/client", "client_private_key_ref": "vault://keys/client-private", "trusted_ca_refs": ["vault://certs/trusted-ca"], "verify_peer": true, "minimum_tls_version": "TLS1.2" }]
+}

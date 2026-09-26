@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/dns-over-https.json",
+  "title": "DNS-over-HTTPS resolver configuration",
+  "description": "Encrypted DNS resolver connection using DNS-over-HTTPS.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "DNS-over-HTTPS" },
+    "resolver_uri": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "http_version": { "type": "string", "enum": ["2", "3"] },
+    "verify_certificate": { "const": true },
+    "trust_store_ref": { "type": "string", "minLength": 1 },
+    "dnssec_validation": { "type": "boolean" }
+  },
+  "required": ["protocol", "resolver_uri", "verify_certificate"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "DNS-over-HTTPS", "resolver_uri": "https://dns.example.net/dns-query", "http_version": "2", "verify_certificate": true, "trust_store_ref": "vault://trust/public-ca-bundle", "dnssec_validation": true }]
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/hashing/scrypt.json",
+  "title": "scrypt password hashing configuration",
+  "description": "Memory-hard password hashing configuration. Store the generated salt with each password hash.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "scrypt" },
+    "cost_n": { "type": "integer", "enum": [16384, 32768, 65536, 131072, 262144] },
+    "block_size_r": { "type": "integer", "minimum": 1, "maximum": 32 },
+    "parallelism_p": { "type": "integer", "minimum": 1, "maximum": 16 },
+    "salt_bytes": { "type": "integer", "minimum": 16, "maximum": 64 },
+    "output_bytes": { "type": "integer", "minimum": 16, "maximum": 64 }
+  },
+  "required": ["algorithm", "cost_n", "block_size_r", "parallelism_p", "salt_bytes", "output_bytes"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "scrypt", "cost_n": 65536, "block_size_r": 8, "parallelism_p": 1, "salt_bytes": 16, "output_bytes": 32 }]
+}

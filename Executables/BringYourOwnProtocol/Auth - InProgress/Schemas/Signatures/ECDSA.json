@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/signatures/ecdsa.json",
+  "title": "ECDSA signature configuration",
+  "description": "Configuration for digital signatures using ECDSA.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "ECDSA" },
+    "private_key_ref": { "type": "string", "minLength": 1 },
+    "public_key_ref": { "type": "string", "minLength": 1 },
+    "curve": { "type": "string", "enum": ["P-256", "P-384", "P-521"] },
+    "hash": { "type": "string", "enum": ["SHA-256", "SHA-384", "SHA-512"] }
+  },
+  "required": ["algorithm", "private_key_ref", "public_key_ref", "curve", "hash"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "ECDSA", "private_key_ref": "vault://keys/signing-private", "public_key_ref": "vault://keys/signing-public", "curve": "P-256", "hash": "SHA-256" }]
+}

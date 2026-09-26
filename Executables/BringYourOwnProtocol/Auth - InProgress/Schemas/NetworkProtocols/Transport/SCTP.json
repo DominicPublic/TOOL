@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/sctp.json",
+  "title": "SCTP endpoint configuration",
+  "description": "Representative Stream Control Transmission Protocol association configuration.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "SCTP" },
+    "port": { "type": "integer", "minimum": 1, "maximum": 65535 },
+    "outbound_streams": { "type": "integer", "minimum": 1, "maximum": 65535 },
+    "inbound_streams": { "type": "integer", "minimum": 1, "maximum": 65535 },
+    "heartbeat_interval_seconds": { "type": "integer", "minimum": 1 }
+  },
+  "required": ["protocol", "port", "outbound_streams", "inbound_streams"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "SCTP", "port": 3868, "outbound_streams": 10, "inbound_streams": 10, "heartbeat_interval_seconds": 30 }]
+}

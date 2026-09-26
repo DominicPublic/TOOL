@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/hashing/md5.json",
+  "title": "MD5 hashing configuration",
+  "description": "Legacy hash function retained for compatibility and non-security checksums only; do not use for security decisions or password storage.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "MD5" },
+    "input_encoding": { "type": "string", "enum": ["utf-8", "base64", "hex"] },
+    "output_encoding": { "type": "string", "enum": ["base64url", "base64", "hex"] }
+  },
+  "required": ["algorithm", "input_encoding", "output_encoding"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "MD5", "input_encoding": "utf-8", "output_encoding": "hex" }]
+}

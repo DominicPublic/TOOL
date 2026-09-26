@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/encryption/rsa-oaep.json",
+  "title": "RSA-OAEP encryption configuration",
+  "description": "Configuration for RSA encryption using OAEP padding.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "RSA-OAEP" },
+    "public_key_ref": { "type": "string", "minLength": 1 },
+    "hash": { "type": "string", "enum": ["SHA-256", "SHA-384", "SHA-512"] },
+    "mgf": { "const": "MGF1" },
+    "mgf1_hash": { "type": "string", "enum": ["SHA-256", "SHA-384", "SHA-512"] }
+  },
+  "required": ["algorithm", "public_key_ref", "hash", "mgf", "mgf1_hash"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "RSA-OAEP", "public_key_ref": "vault://keys/recipient-public", "hash": "SHA-256", "mgf": "MGF1", "mgf1_hash": "SHA-256" }]
+}

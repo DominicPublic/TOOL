@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/signatures/dsa.json",
+  "title": "DSA signature configuration",
+  "description": "Legacy Digital Signature Algorithm configuration. DSA is retained for interoperability only and should not be selected for new systems.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "DSA" },
+    "private_key_ref": { "type": "string", "minLength": 1 },
+    "public_key_ref": { "type": "string", "minLength": 1 },
+    "hash": { "type": "string", "enum": ["SHA-256", "SHA-384", "SHA-512"] },
+    "encoding": { "type": "string", "enum": ["der", "ieee-p1363"] }
+  },
+  "required": ["algorithm", "private_key_ref", "public_key_ref", "hash", "encoding"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "DSA", "private_key_ref": "vault://keys/legacy-signing-private", "public_key_ref": "vault://keys/legacy-signing-public", "hash": "SHA-256", "encoding": "der" }]
+}

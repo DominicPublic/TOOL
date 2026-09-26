@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/encryption/aes-ccm.json",
+  "title": "AES-CCM encryption configuration",
+  "description": "Configuration for authenticated encryption using AES in CCM mode.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "AES-CCM" },
+    "key_ref": { "type": "string", "minLength": 1 },
+    "key_size_bits": { "type": "integer", "enum": [128, 192, 256] },
+    "nonce_bytes": { "type": "integer", "minimum": 7, "maximum": 13 },
+    "tag_bytes": { "type": "integer", "enum": [4, 6, 8, 10, 12, 14, 16] }
+  },
+  "required": ["algorithm", "key_ref", "key_size_bits", "nonce_bytes", "tag_bytes"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "AES-CCM", "key_ref": "vault://keys/service-data", "key_size_bits": 256, "nonce_bytes": 12, "tag_bytes": 16 }]
+}

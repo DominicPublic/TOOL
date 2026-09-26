@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/hashing/shake128.json",
+  "title": "SHAKE128 hashing configuration",
+  "description": "Extendable-output SHA-3 function configuration; output length is selected by the caller.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "SHAKE128" },
+    "input_encoding": { "type": "string", "enum": ["utf-8", "base64", "hex"] },
+    "output_encoding": { "type": "string", "enum": ["base64url", "base64", "hex"] },
+    "output_bytes": { "type": "integer", "minimum": 16, "maximum": 64 }
+  },
+  "required": ["algorithm", "input_encoding", "output_encoding", "output_bytes"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "SHAKE128", "input_encoding": "utf-8", "output_encoding": "hex", "output_bytes": 32 }]
+}

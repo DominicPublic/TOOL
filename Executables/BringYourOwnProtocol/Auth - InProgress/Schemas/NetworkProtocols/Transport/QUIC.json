@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/quic.json",
+  "title": "QUIC endpoint configuration",
+  "description": "QUIC transport configuration with TLS 1.3 security.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "QUIC" },
+    "port": { "type": "integer", "minimum": 1, "maximum": 65535 },
+    "versions": { "type": "array", "items": { "type": "string", "enum": ["v1", "v2"] }, "minItems": 1, "uniqueItems": true },
+    "tls_minimum_version": { "const": "TLS1.3" },
+    "alpn_protocols": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 },
+    "congestion_control": { "type": "string", "enum": ["cubic", "reno", "bbr"] }
+  },
+  "required": ["protocol", "port", "versions", "tls_minimum_version", "alpn_protocols"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "QUIC", "port": 443, "versions": ["v1", "v2"], "tls_minimum_version": "TLS1.3", "alpn_protocols": ["h3"], "congestion_control": "cubic" }]
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/authentication/http-basic.json",
+  "title": "HTTP Basic authentication configuration",
+  "description": "HTTP Basic credentials must only be sent over TLS.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "HTTP-Basic" },
+    "username_ref": { "type": "string", "minLength": 1 },
+    "password_ref": { "type": "string", "minLength": 1 },
+    "require_tls": { "const": true }
+  },
+  "required": ["protocol", "username_ref", "password_ref", "require_tls"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "HTTP-Basic", "username_ref": "vault://service/basic-username", "password_ref": "vault://service/basic-password", "require_tls": true }]
+}

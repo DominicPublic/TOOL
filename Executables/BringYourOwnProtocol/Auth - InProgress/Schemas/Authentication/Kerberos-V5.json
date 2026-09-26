@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/authentication/kerberos-v5.json",
+  "title": "Kerberos V5 authentication configuration",
+  "description": "Client configuration for service authentication with Kerberos V5.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "Kerberos-V5" },
+    "realm": { "type": "string", "pattern": "^[A-Z0-9.-]+$" },
+    "kdc_servers": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 },
+    "service_principal": { "type": "string", "pattern": "^[^/@]+/[^@]+@[^@]+$" },
+    "credential_source": { "type": "string", "enum": ["keytab", "ticket-cache"] },
+    "credential_ref": { "type": "string", "minLength": 1 },
+    "clock_skew_seconds": { "type": "integer", "minimum": 0, "maximum": 300 }
+  },
+  "required": ["protocol", "realm", "kdc_servers", "service_principal", "credential_source", "credential_ref"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "Kerberos-V5", "realm": "EXAMPLE.COM", "kdc_servers": ["kdc1.example.com:88"], "service_principal": "HTTP/app.example.com@EXAMPLE.COM", "credential_source": "keytab", "credential_ref": "vault://kerberos/app-keytab", "clock_skew_seconds": 60 }]
+}

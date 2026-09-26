@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/encryption/aes-cbc.json",
+  "title": "AES-CBC encryption configuration",
+  "description": "Legacy confidentiality-only mode. This configuration requires encrypt-then-MAC with an independent HMAC-SHA-256 key; prefer an AEAD mode for new systems.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "AES-CBC" },
+    "key_ref": { "type": "string", "minLength": 1 },
+    "key_size_bits": { "type": "integer", "enum": [128, 192, 256] },
+    "iv_bytes": { "type": "integer", "const": 16 },
+    "padding": { "const": "PKCS7" },
+    "integrity": { "const": "encrypt-then-MAC" },
+    "mac_algorithm": { "const": "HMAC-SHA-256" },
+    "mac_key_ref": { "type": "string", "minLength": 1 }
+  },
+  "required": ["algorithm", "key_ref", "key_size_bits", "iv_bytes", "padding", "integrity", "mac_algorithm", "mac_key_ref"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "AES-CBC", "key_ref": "vault://keys/encryption", "key_size_bits": 256, "iv_bytes": 16, "padding": "PKCS7", "integrity": "encrypt-then-MAC", "mac_algorithm": "HMAC-SHA-256", "mac_key_ref": "vault://keys/integrity" }]
+}

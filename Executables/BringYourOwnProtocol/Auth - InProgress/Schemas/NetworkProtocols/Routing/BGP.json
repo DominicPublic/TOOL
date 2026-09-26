@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/bgp.json",
+  "title": "BGP peer configuration",
+  "description": "Border Gateway Protocol peer configuration with optional session authentication.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "BGP" },
+    "local_as": { "type": "integer", "minimum": 1, "maximum": 4294967295 },
+    "peer_as": { "type": "integer", "minimum": 1, "maximum": 4294967295 },
+    "neighbor": { "type": "string", "minLength": 1 },
+    "hold_time_seconds": { "type": "integer", "minimum": 3, "maximum": 65535 },
+    "authentication_secret_ref": { "type": "string", "minLength": 1 },
+    "maximum_prefixes": { "type": "integer", "minimum": 1 }
+  },
+  "required": ["protocol", "local_as", "peer_as", "neighbor"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "BGP", "local_as": 64512, "peer_as": 64513, "neighbor": "192.0.2.2", "hold_time_seconds": 90, "authentication_secret_ref": "vault://routing/bgp-peer", "maximum_prefixes": 1000 }]
+}

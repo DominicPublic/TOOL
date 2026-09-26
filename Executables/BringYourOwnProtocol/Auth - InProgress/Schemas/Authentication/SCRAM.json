@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/authentication/scram.json",
+  "title": "SCRAM authentication configuration",
+  "description": "Salted Challenge Response Authentication Mechanism client configuration.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "SCRAM" },
+    "mechanism": { "type": "string", "enum": ["SCRAM-SHA-256", "SCRAM-SHA-512"] },
+    "username_ref": { "type": "string", "minLength": 1 },
+    "credential_ref": { "type": "string", "minLength": 1 },
+    "channel_binding": { "type": "string", "enum": ["required", "preferred", "disabled"] }
+  },
+  "required": ["protocol", "mechanism", "username_ref", "credential_ref", "channel_binding"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "SCRAM", "mechanism": "SCRAM-SHA-256", "username_ref": "vault://service/scram-username", "credential_ref": "vault://service/scram-credential", "channel_binding": "preferred" }]
+}

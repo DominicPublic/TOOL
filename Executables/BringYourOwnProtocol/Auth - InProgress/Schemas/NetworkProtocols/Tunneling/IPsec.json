@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/ipsec.json",
+  "title": "IPsec tunnel configuration",
+  "description": "IPsec tunnel configuration using IKEv2 and authenticated encryption.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "IPsec" },
+    "ike_version": { "const": "IKEv2" },
+    "local_peer": { "type": "string", "minLength": 1 },
+    "remote_peer": { "type": "string", "minLength": 1 },
+    "authentication_method": { "type": "string", "enum": ["certificate", "pre-shared-key"] },
+    "credential_ref": { "type": "string", "minLength": 1 },
+    "encryption_algorithm": { "type": "string", "enum": ["AES-128-GCM", "AES-256-GCM", "ChaCha20-Poly1305"] },
+    "diffie_hellman_group": { "type": "string", "enum": ["Curve25519", "ECP256", "ECP384"] },
+    "perfect_forward_secrecy": { "const": true }
+  },
+  "required": ["protocol", "ike_version", "local_peer", "remote_peer", "authentication_method", "credential_ref", "encryption_algorithm", "diffie_hellman_group", "perfect_forward_secrecy"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "IPsec", "ike_version": "IKEv2", "local_peer": "gateway-a.example.net", "remote_peer": "gateway-b.example.net", "authentication_method": "certificate", "credential_ref": "vault://certs/ipsec-gateway", "encryption_algorithm": "AES-256-GCM", "diffie_hellman_group": "Curve25519", "perfect_forward_secrecy": true }]
+}

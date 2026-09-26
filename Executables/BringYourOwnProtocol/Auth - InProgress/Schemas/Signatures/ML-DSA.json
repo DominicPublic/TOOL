@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/signatures/ml-dsa.json",
+  "title": "ML-DSA signature configuration",
+  "description": "Module-Lattice-Based Digital Signature Algorithm configuration standardized in FIPS 204.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "ML-DSA" },
+    "parameter_set": { "type": "string", "enum": ["ML-DSA-44", "ML-DSA-65", "ML-DSA-87"] },
+    "private_key_ref": { "type": "string", "minLength": 1 },
+    "public_key_ref": { "type": "string", "minLength": 1 },
+    "encoding": { "const": "base64" }
+  },
+  "required": ["algorithm", "parameter_set", "private_key_ref", "public_key_ref", "encoding"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "ML-DSA", "parameter_set": "ML-DSA-65", "private_key_ref": "vault://keys/pq-signing-private", "public_key_ref": "vault://keys/pq-signing-public", "encoding": "base64" }]
+}

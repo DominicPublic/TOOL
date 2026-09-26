@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/http-2.json",
+  "title": "HTTP/2 service configuration",
+  "description": "Representative HTTP/2 service configuration, typically negotiated over TLS using ALPN.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "HTTP" },
+    "version": { "const": "2" },
+    "listen_address": { "type": "string", "minLength": 1 },
+    "port": { "type": "integer", "minimum": 1, "maximum": 65535 },
+    "tls_enabled": { "const": true },
+    "minimum_tls_version": { "type": "string", "enum": ["TLS1.2", "TLS1.3"] },
+    "maximum_concurrent_streams": { "type": "integer", "minimum": 1 },
+    "server_push_enabled": { "const": false }
+  },
+  "required": ["protocol", "version", "listen_address", "port", "tls_enabled", "minimum_tls_version", "server_push_enabled"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "HTTP", "version": "2", "listen_address": "0.0.0.0", "port": 443, "tls_enabled": true, "minimum_tls_version": "TLS1.2", "maximum_concurrent_streams": 100, "server_push_enabled": false }]
+}

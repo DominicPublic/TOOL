@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/dhcpv6.json",
+  "title": "DHCPv6 server configuration",
+  "description": "Representative DHCPv6 configuration for stateful address or prefix delegation.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "DHCPv6" },
+    "mode": { "type": "string", "enum": ["stateful", "stateless", "prefix-delegation"] },
+    "address_pool_start": { "type": "string", "format": "ipv6" },
+    "address_pool_end": { "type": "string", "format": "ipv6" },
+    "delegated_prefix": { "type": "string", "pattern": "^[0-9a-fA-F:]+/[0-9]{1,3}$" },
+    "preferred_lifetime_seconds": { "type": "integer", "minimum": 60 },
+    "valid_lifetime_seconds": { "type": "integer", "minimum": 60 }
+  },
+  "required": ["protocol", "mode", "preferred_lifetime_seconds", "valid_lifetime_seconds"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "DHCPv6", "mode": "prefix-delegation", "delegated_prefix": "2001:db8:100::/56", "preferred_lifetime_seconds": 3600, "valid_lifetime_seconds": 7200 }]
+}

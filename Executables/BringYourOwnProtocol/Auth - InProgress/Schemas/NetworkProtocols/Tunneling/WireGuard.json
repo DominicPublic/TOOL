@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/wireguard.json",
+  "title": "WireGuard interface configuration",
+  "description": "WireGuard VPN interface configuration with secret keys stored by reference.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "WireGuard" },
+    "interface_private_key_ref": { "type": "string", "minLength": 1 },
+    "listen_port": { "type": "integer", "minimum": 1, "maximum": 65535 },
+    "addresses": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 },
+    "peers": { "type": "array", "items": { "type": "object", "properties": { "public_key_ref": { "type": "string", "minLength": 1 }, "endpoint": { "type": "string", "minLength": 1 }, "allowed_ips": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 }, "persistent_keepalive_seconds": { "type": "integer", "minimum": 0, "maximum": 65535 } }, "required": ["public_key_ref", "allowed_ips"], "additionalProperties": false }, "minItems": 1 }
+  },
+  "required": ["protocol", "interface_private_key_ref", "addresses", "peers"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "WireGuard", "interface_private_key_ref": "vault://wireguard/interface-private", "listen_port": 51820, "addresses": ["10.10.0.1/24"], "peers": [{ "public_key_ref": "vault://wireguard/peer-a-public", "endpoint": "vpn.example.net:51820", "allowed_ips": ["10.10.0.2/32"], "persistent_keepalive_seconds": 25 }] }]
+}

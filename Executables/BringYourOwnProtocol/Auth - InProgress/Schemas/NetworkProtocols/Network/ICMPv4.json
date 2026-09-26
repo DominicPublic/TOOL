@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/icmpv4.json",
+  "title": "ICMPv4 policy configuration",
+  "description": "Representative policy for ICMPv4 message handling and rate limiting.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "ICMPv4" },
+    "allowed_types": { "type": "array", "items": { "type": "integer", "minimum": 0, "maximum": 255 }, "uniqueItems": true },
+    "rate_limit_per_second": { "type": "integer", "minimum": 1 },
+    "allow_echo_request": { "type": "boolean" }
+  },
+  "required": ["protocol", "allowed_types", "rate_limit_per_second", "allow_echo_request"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "ICMPv4", "allowed_types": [0, 3, 8, 11], "rate_limit_per_second": 10, "allow_echo_request": true }]
+}

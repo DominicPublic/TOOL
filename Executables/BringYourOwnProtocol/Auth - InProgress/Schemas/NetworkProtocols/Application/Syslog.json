@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/syslog.json",
+  "title": "Syslog forwarding configuration",
+  "description": "Syslog message forwarding configuration using RFC 5424 format.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "Syslog" },
+    "destination": { "type": "string", "minLength": 1 },
+    "port": { "type": "integer", "minimum": 1, "maximum": 65535 },
+    "transport": { "type": "string", "enum": ["UDP", "TCP", "TLS"] },
+    "format": { "const": "RFC5424" },
+    "verify_peer": { "type": "boolean" },
+    "trust_store_ref": { "type": "string", "minLength": 1 }
+  },
+  "required": ["protocol", "destination", "port", "transport", "format"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "Syslog", "destination": "logs.example.net", "port": 6514, "transport": "TLS", "format": "RFC5424", "verify_peer": true, "trust_store_ref": "vault://trust/logging-ca" }]
+}

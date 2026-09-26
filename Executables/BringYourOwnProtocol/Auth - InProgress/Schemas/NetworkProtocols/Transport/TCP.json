@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/tcp.json",
+  "title": "TCP endpoint configuration",
+  "description": "Representative Transmission Control Protocol listener configuration.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "TCP" },
+    "role": { "type": "string", "enum": ["client", "server"] },
+    "port": { "type": "integer", "minimum": 1, "maximum": 65535 },
+    "connect_timeout_ms": { "type": "integer", "minimum": 1 },
+    "keepalive": { "type": "boolean" },
+    "no_delay": { "type": "boolean" },
+    "backlog": { "type": "integer", "minimum": 1 }
+  },
+  "required": ["protocol", "role", "port"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "TCP", "role": "server", "port": 443, "keepalive": true, "no_delay": true, "backlog": 128 }]
+}

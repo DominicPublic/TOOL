@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/encryption/aes-kw.json",
+  "title": "AES key-wrap configuration",
+  "description": "Configuration for wrapping cryptographic keys using the AES Key Wrap algorithm.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "AES-KW" },
+    "wrapping_key_ref": { "type": "string", "minLength": 1 },
+    "wrapping_key_size_bits": { "type": "integer", "enum": [128, 192, 256] },
+    "integrity_check": { "const": "RFC3394" }
+  },
+  "required": ["algorithm", "wrapping_key_ref", "wrapping_key_size_bits", "integrity_check"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "AES-KW", "wrapping_key_ref": "vault://keys/key-encryption-key", "wrapping_key_size_bits": 256, "integrity_check": "RFC3394" }]
+}

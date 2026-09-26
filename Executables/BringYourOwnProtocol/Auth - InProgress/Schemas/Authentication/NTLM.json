@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/authentication/ntlm.json",
+  "title": "NTLM authentication configuration",
+  "description": "Legacy Windows challenge-response configuration. NTLMv1 is prohibited; prefer Kerberos where available.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "NTLM" },
+    "domain": { "type": "string", "minLength": 1 },
+    "credential_ref": { "type": "string", "minLength": 1 },
+    "allow_ntlmv1": { "const": false },
+    "require_message_signing": { "const": true }
+  },
+  "required": ["protocol", "domain", "credential_ref", "allow_ntlmv1", "require_message_signing"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "NTLM", "domain": "EXAMPLE", "credential_ref": "vault://windows/service-credential", "allow_ntlmv1": false, "require_message_signing": true }]
+}

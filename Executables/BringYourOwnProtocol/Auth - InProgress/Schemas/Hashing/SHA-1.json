@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/hashing/sha-1.json",
+  "title": "SHA-1 hashing configuration",
+  "description": "Legacy hash function retained for compatibility only; do not use for collision-resistant security or password storage.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "SHA-1" },
+    "input_encoding": { "type": "string", "enum": ["utf-8", "base64", "hex"] },
+    "output_encoding": { "type": "string", "enum": ["base64url", "base64", "hex"] }
+  },
+  "required": ["algorithm", "input_encoding", "output_encoding"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "SHA-1", "input_encoding": "utf-8", "output_encoding": "hex" }]
+}

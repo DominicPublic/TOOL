@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/authentication/webauthn.json",
+  "title": "WebAuthn relying-party configuration",
+  "description": "Configuration for passwordless or multi-factor authentication using WebAuthn credentials.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "WebAuthn" },
+    "relying_party_id": { "type": "string", "minLength": 1 },
+    "relying_party_name": { "type": "string", "minLength": 1 },
+    "allowed_origins": { "type": "array", "items": { "type": "string", "format": "uri" }, "minItems": 1 },
+    "user_verification": { "type": "string", "enum": ["required", "preferred", "discouraged"] },
+    "attestation": { "type": "string", "enum": ["none", "indirect", "direct", "enterprise"] }
+  },
+  "required": ["protocol", "relying_party_id", "relying_party_name", "allowed_origins", "user_verification", "attestation"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "WebAuthn", "relying_party_id": "example.com", "relying_party_name": "Example Service", "allowed_origins": ["https://login.example.com"], "user_verification": "required", "attestation": "none" }]
+}

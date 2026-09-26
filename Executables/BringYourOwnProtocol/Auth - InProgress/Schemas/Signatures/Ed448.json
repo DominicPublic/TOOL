@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/signatures/ed448.json",
+  "title": "Ed448 signature configuration",
+  "description": "Configuration for digital signatures using Ed448.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "Ed448" },
+    "private_key_ref": { "type": "string", "minLength": 1 },
+    "public_key_ref": { "type": "string", "minLength": 1 },
+    "encoding": { "type": "string", "enum": ["base64url", "base64", "hex"] }
+  },
+  "required": ["algorithm", "private_key_ref", "public_key_ref", "encoding"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "Ed448", "private_key_ref": "vault://keys/signing-private", "public_key_ref": "vault://keys/signing-public", "encoding": "base64url" }]
+}

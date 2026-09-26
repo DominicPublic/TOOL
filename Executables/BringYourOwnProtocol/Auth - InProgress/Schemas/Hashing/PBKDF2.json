@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/hashing/pbkdf2.json",
+  "title": "PBKDF2 password hashing configuration",
+  "description": "Password-based key derivation configuration. Use a unique random salt for each password.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "PBKDF2" },
+    "prf": { "type": "string", "enum": ["HMAC-SHA-256", "HMAC-SHA-384", "HMAC-SHA-512"] },
+    "iterations": { "type": "integer", "minimum": 600000, "maximum": 10000000 },
+    "salt_bytes": { "type": "integer", "minimum": 16, "maximum": 64 },
+    "output_bytes": { "type": "integer", "minimum": 16, "maximum": 64 }
+  },
+  "required": ["algorithm", "prf", "iterations", "salt_bytes", "output_bytes"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "PBKDF2", "prf": "HMAC-SHA-256", "iterations": 600000, "salt_bytes": 16, "output_bytes": 32 }]
+}

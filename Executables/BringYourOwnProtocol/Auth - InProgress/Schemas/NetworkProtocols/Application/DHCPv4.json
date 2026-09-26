@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/dhcpv4.json",
+  "title": "DHCPv4 server configuration",
+  "description": "Representative Dynamic Host Configuration Protocol for IPv4 address-pool configuration.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "DHCPv4" },
+    "subnet": { "type": "string", "pattern": "^[0-9.]+/[0-9]{1,2}$" },
+    "pool_start": { "type": "string", "format": "ipv4" },
+    "pool_end": { "type": "string", "format": "ipv4" },
+    "router": { "type": "string", "format": "ipv4" },
+    "lease_time_seconds": { "type": "integer", "minimum": 60 },
+    "dns_servers": { "type": "array", "items": { "type": "string", "format": "ipv4" } }
+  },
+  "required": ["protocol", "subnet", "pool_start", "pool_end", "lease_time_seconds"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "DHCPv4", "subnet": "192.0.2.0/24", "pool_start": "192.0.2.100", "pool_end": "192.0.2.200", "router": "192.0.2.1", "lease_time_seconds": 86400, "dns_servers": ["192.0.2.53"] }]
+}

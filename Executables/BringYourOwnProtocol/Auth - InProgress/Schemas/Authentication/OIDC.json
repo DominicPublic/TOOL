@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/authentication/oidc.json",
+  "title": "OpenID Connect configuration",
+  "description": "Configuration for an OpenID Connect relying party.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "OIDC" },
+    "issuer": { "type": "string", "format": "uri" },
+    "client_id": { "type": "string", "minLength": 1 },
+    "redirect_uris": { "type": "array", "items": { "type": "string", "format": "uri" }, "minItems": 1 },
+    "response_type": { "type": "string", "enum": ["code"] },
+    "scopes": { "type": "array", "items": { "type": "string" }, "contains": { "const": "openid" } }
+  },
+  "required": ["protocol", "issuer", "client_id", "redirect_uris", "response_type", "scopes"],
+  "additionalProperties": false,
+  "examples": [{
+    "protocol": "OIDC",
+    "issuer": "https://identity.example.com",
+    "client_id": "sample-app",
+    "redirect_uris": ["https://app.example.com/callback"],
+    "response_type": "code",
+    "scopes": ["openid", "profile", "email"]
+  }]
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/ntp.json",
+  "title": "NTP client configuration",
+  "description": "Network Time Protocol client configuration with optional Network Time Security.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "NTP" },
+    "servers": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 },
+    "version": { "type": "integer", "const": 4 },
+    "poll_interval_seconds": { "type": "integer", "minimum": 16 },
+    "network_time_security": { "type": "boolean" },
+    "nts_ke_port": { "type": "integer", "const": 4460 }
+  },
+  "required": ["protocol", "servers", "version", "network_time_security"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "NTP", "servers": ["time.example.net"], "version": 4, "poll_interval_seconds": 64, "network_time_security": true, "nts_ke_port": 4460 }]
+}

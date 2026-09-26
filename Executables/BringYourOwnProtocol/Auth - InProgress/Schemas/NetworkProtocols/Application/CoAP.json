@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/coap.json",
+  "title": "CoAP endpoint configuration",
+  "description": "Constrained Application Protocol endpoint configuration with an explicit security mode.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "CoAP" },
+    "endpoint": { "type": "string", "format": "uri", "pattern": "^coaps?://" },
+    "transport": { "type": "string", "enum": ["UDP", "TCP"] },
+    "security_mode": { "type": "string", "enum": ["DTLS", "TLS", "OSCORE"] },
+    "credential_ref": { "type": "string", "minLength": 1 },
+    "confirmable_messages": { "type": "boolean" }
+  },
+  "required": ["protocol", "endpoint", "transport", "security_mode"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "CoAP", "endpoint": "coaps://sensor.example.com/temperature", "transport": "UDP", "security_mode": "DTLS", "credential_ref": "vault://coap/device-credential", "confirmable_messages": true }]
+}

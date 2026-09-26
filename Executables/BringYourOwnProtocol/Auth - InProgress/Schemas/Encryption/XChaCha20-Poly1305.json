@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/encryption/xchacha20-poly1305.json",
+  "title": "XChaCha20-Poly1305 encryption configuration",
+  "description": "Authenticated encryption using XChaCha20-Poly1305 with an extended nonce.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "XChaCha20-Poly1305" },
+    "key_ref": { "type": "string", "minLength": 1 },
+    "nonce_bytes": { "type": "integer", "const": 24 },
+    "tag_bytes": { "type": "integer", "const": 16 }
+  },
+  "required": ["algorithm", "key_ref", "nonce_bytes", "tag_bytes"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "XChaCha20-Poly1305", "key_ref": "vault://keys/service-data", "nonce_bytes": 24, "tag_bytes": 16 }]
+}

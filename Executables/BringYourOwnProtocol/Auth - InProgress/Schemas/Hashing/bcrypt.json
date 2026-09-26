@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/hashing/bcrypt.json",
+  "title": "bcrypt password hashing configuration",
+  "description": "Adaptive password hashing configuration. bcrypt processes at most 72 input bytes; account for that limit explicitly in the application.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "bcrypt" },
+    "cost": { "type": "integer", "minimum": 10, "maximum": 16 },
+    "salt_bytes": { "type": "integer", "const": 16 },
+    "output_bytes": { "type": "integer", "const": 23 }
+  },
+  "required": ["algorithm", "cost", "salt_bytes", "output_bytes"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "bcrypt", "cost": 12, "salt_bytes": 16, "output_bytes": 23 }]
+}

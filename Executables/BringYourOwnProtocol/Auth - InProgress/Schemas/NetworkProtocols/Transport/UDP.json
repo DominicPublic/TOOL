@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/udp.json",
+  "title": "UDP endpoint configuration",
+  "description": "Representative User Datagram Protocol endpoint configuration.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "UDP" },
+    "role": { "type": "string", "enum": ["client", "server"] },
+    "port": { "type": "integer", "minimum": 1, "maximum": 65535 },
+    "maximum_datagram_bytes": { "type": "integer", "minimum": 1, "maximum": 65507 },
+    "allow_broadcast": { "type": "boolean" }
+  },
+  "required": ["protocol", "role", "port", "maximum_datagram_bytes"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "UDP", "role": "server", "port": 5353, "maximum_datagram_bytes": 1200, "allow_broadcast": false }]
+}

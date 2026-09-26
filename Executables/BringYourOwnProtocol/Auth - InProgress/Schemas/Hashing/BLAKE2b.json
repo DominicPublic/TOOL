@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/hashing/blake2b.json",
+  "title": "BLAKE2b hashing configuration",
+  "description": "Configuration for the BLAKE2b cryptographic hash function.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "BLAKE2b" },
+    "input_encoding": { "type": "string", "enum": ["utf-8", "base64", "hex"] },
+    "output_encoding": { "type": "string", "enum": ["base64url", "base64", "hex"] },
+    "digest_bytes": { "type": "integer", "minimum": 1, "maximum": 64 },
+    "key_ref": { "type": "string", "minLength": 1 }
+  },
+  "required": ["algorithm", "input_encoding", "output_encoding", "digest_bytes"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "BLAKE2b", "input_encoding": "utf-8", "output_encoding": "hex", "digest_bytes": 32 }]
+}

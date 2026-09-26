@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/signatures/rsa-pss.json",
+  "title": "RSA-PSS signature configuration",
+  "description": "Configuration for RSA signatures using Probabilistic Signature Scheme padding.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "RSA-PSS" },
+    "private_key_ref": { "type": "string", "minLength": 1 },
+    "public_key_ref": { "type": "string", "minLength": 1 },
+    "hash": { "type": "string", "enum": ["SHA-256", "SHA-384", "SHA-512"] },
+    "mgf": { "const": "MGF1" },
+    "salt_length_bytes": { "type": "integer", "minimum": 0 }
+  },
+  "required": ["algorithm", "private_key_ref", "public_key_ref", "hash", "mgf", "salt_length_bytes"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "RSA-PSS", "private_key_ref": "vault://keys/signing-private", "public_key_ref": "vault://keys/signing-public", "hash": "SHA-256", "mgf": "MGF1", "salt_length_bytes": 32 }]
+}

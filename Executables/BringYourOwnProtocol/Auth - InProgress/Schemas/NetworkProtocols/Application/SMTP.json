@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/smtp.json",
+  "title": "SMTP client configuration",
+  "description": "SMTP submission configuration requiring TLS and certificate verification.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "SMTP" },
+    "host": { "type": "string", "minLength": 1 },
+    "port": { "type": "integer", "enum": [465, 587] },
+    "tls_mode": { "type": "string", "enum": ["implicit", "starttls-required"] },
+    "verify_certificate": { "const": true },
+    "username_ref": { "type": "string", "minLength": 1 },
+    "password_ref": { "type": "string", "minLength": 1 }
+  },
+  "required": ["protocol", "host", "port", "tls_mode", "verify_certificate"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "SMTP", "host": "smtp.example.com", "port": 587, "tls_mode": "starttls-required", "verify_certificate": true, "username_ref": "vault://smtp/username", "password_ref": "vault://smtp/password" }]
+}

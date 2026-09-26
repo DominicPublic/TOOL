@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/encryption/hpke.json",
+  "title": "HPKE encryption configuration",
+  "description": "Hybrid Public Key Encryption suite configuration based on RFC 9180.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "HPKE" },
+    "recipient_public_key_ref": { "type": "string", "minLength": 1 },
+    "kem": { "type": "string", "enum": ["DHKEM(X25519,HKDF-SHA256)", "DHKEM(P-256,HKDF-SHA256)", "DHKEM(P-384,HKDF-SHA384)", "DHKEM(P-521,HKDF-SHA512)"] },
+    "kdf": { "type": "string", "enum": ["HKDF-SHA256", "HKDF-SHA384", "HKDF-SHA512"] },
+    "aead": { "type": "string", "enum": ["AES-128-GCM", "AES-256-GCM", "ChaCha20-Poly1305"] },
+    "application_info": { "type": "string" }
+  },
+  "required": ["algorithm", "recipient_public_key_ref", "kem", "kdf", "aead"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "HPKE", "recipient_public_key_ref": "vault://keys/recipient-public", "kem": "DHKEM(X25519,HKDF-SHA256)", "kdf": "HKDF-SHA256", "aead": "AES-256-GCM", "application_info": "service payload v1" }]
+}

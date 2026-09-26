@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/authentication/saml2.json",
+  "title": "SAML 2.0 service provider configuration",
+  "description": "Configuration for a SAML 2.0 service provider using HTTP-POST binding.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "SAML2" },
+    "entity_id": { "type": "string", "format": "uri" },
+    "sso_url": { "type": "string", "format": "uri" },
+    "acs_url": { "type": "string", "format": "uri" },
+    "name_id_format": { "type": "string", "minLength": 1 },
+    "signing_certificate": { "type": "string", "minLength": 1 }
+  },
+  "required": ["protocol", "entity_id", "sso_url", "acs_url", "name_id_format", "signing_certificate"],
+  "additionalProperties": false,
+  "examples": [{
+    "protocol": "SAML2",
+    "entity_id": "https://sp.example.com/metadata",
+    "sso_url": "https://idp.example.com/sso",
+    "acs_url": "https://sp.example.com/saml/acs",
+    "name_id_format": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+    "signing_certificate": "-----BEGIN CERTIFICATE-----..."
+  }]
+}

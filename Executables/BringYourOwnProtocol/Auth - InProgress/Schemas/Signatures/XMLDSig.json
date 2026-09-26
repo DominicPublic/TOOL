@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/signatures/xmldsig.json",
+  "title": "XML Digital Signature configuration",
+  "description": "XML Signature generation configuration with explicit canonicalization and digest algorithms.",
+  "type": "object",
+  "properties": {
+    "format": { "const": "XMLDSig" },
+    "signature_method": { "type": "string", "enum": ["RSA-SHA256", "RSA-PSS-SHA256", "ECDSA-SHA256", "Ed25519"] },
+    "digest_method": { "type": "string", "enum": ["SHA-256", "SHA-384", "SHA-512"] },
+    "canonicalization_method": { "type": "string", "enum": ["exclusive-c14n", "inclusive-c14n"] },
+    "private_key_ref": { "type": "string", "minLength": 1 },
+    "reference_uri": { "type": "string" }
+  },
+  "required": ["format", "signature_method", "digest_method", "canonicalization_method", "private_key_ref", "reference_uri"],
+  "additionalProperties": false,
+  "examples": [{ "format": "XMLDSig", "signature_method": "RSA-PSS-SHA256", "digest_method": "SHA-256", "canonicalization_method": "exclusive-c14n", "private_key_ref": "vault://keys/signing-private", "reference_uri": "#document" }]
+}

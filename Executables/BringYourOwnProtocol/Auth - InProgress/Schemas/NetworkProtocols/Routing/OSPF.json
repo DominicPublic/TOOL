@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/ospf.json",
+  "title": "OSPF routing configuration",
+  "description": "Open Shortest Path First routing configuration for a router instance.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "OSPF" },
+    "version": { "type": "integer", "enum": [2, 3] },
+    "router_id": { "type": "string", "format": "ipv4" },
+    "area_id": { "type": "string", "minLength": 1 },
+    "interfaces": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 },
+    "authentication_secret_ref": { "type": "string", "minLength": 1 }
+  },
+  "required": ["protocol", "version", "router_id", "area_id", "interfaces"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "OSPF", "version": 2, "router_id": "192.0.2.1", "area_id": "0.0.0.0", "interfaces": ["eth0", "eth1"], "authentication_secret_ref": "vault://routing/ospf-area0" }]
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/authentication/ldap.json",
+  "title": "LDAP authentication configuration",
+  "description": "Configuration for user lookup and bind authentication against an LDAP directory.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "LDAP" },
+    "server_uri": { "type": "string", "format": "uri", "pattern": "^ldaps?://" },
+    "bind_dn": { "type": "string", "minLength": 1 },
+    "user_search_base": { "type": "string", "minLength": 1 },
+    "user_filter": { "type": "string", "minLength": 1 },
+    "use_tls": { "type": "boolean" }
+  },
+  "required": ["protocol", "server_uri", "bind_dn", "user_search_base", "user_filter", "use_tls"],
+  "additionalProperties": false,
+  "examples": [{
+    "protocol": "LDAP",
+    "server_uri": "ldaps://directory.example.com:636",
+    "bind_dn": "cn=service-account,ou=services,dc=example,dc=com",
+    "user_search_base": "ou=people,dc=example,dc=com",
+    "user_filter": "(uid={username})",
+    "use_tls": true
+  }]
+}

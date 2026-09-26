@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/dns.json",
+  "title": "DNS resolver configuration",
+  "description": "Domain Name System resolver configuration with optional DNSSEC validation.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "DNS" },
+    "upstream_servers": { "type": "array", "items": { "type": "object", "properties": { "host": { "type": "string", "minLength": 1 }, "port": { "type": "integer", "minimum": 1, "maximum": 65535 }, "transport": { "type": "string", "enum": ["UDP", "TCP", "TLS", "HTTPS"] } }, "required": ["host", "port", "transport"], "additionalProperties": false }, "minItems": 1 },
+    "dnssec_validation": { "type": "boolean" },
+    "cache_ttl_seconds": { "type": "integer", "minimum": 0 }
+  },
+  "required": ["protocol", "upstream_servers", "dnssec_validation"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "DNS", "upstream_servers": [{ "host": "resolver.example.net", "port": 853, "transport": "TLS" }], "dnssec_validation": true, "cache_ttl_seconds": 300 }]
+}

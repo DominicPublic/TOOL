@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/authentication/tacacs-plus.json",
+  "title": "TACACS+ authentication configuration",
+  "description": "TACACS+ client configuration for centralized network-device access control.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "TACACS+" },
+    "server": { "type": "string", "minLength": 1 },
+    "port": { "type": "integer", "const": 49 },
+    "shared_secret_ref": { "type": "string", "minLength": 1 },
+    "timeout_seconds": { "type": "integer", "minimum": 1, "maximum": 60 },
+    "service": { "type": "string", "minLength": 1 }
+  },
+  "required": ["protocol", "server", "port", "shared_secret_ref", "service"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "TACACS+", "server": "tacacs.example.com", "port": 49, "shared_secret_ref": "vault://tacacs/client-secret", "timeout_seconds": 5, "service": "ssh" }]
+}

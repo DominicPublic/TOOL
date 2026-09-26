@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/encryption/aes-gcm-siv.json",
+  "title": "AES-GCM-SIV encryption configuration",
+  "description": "Misuse-resistant authenticated encryption using AES-GCM-SIV.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "AES-GCM-SIV" },
+    "key_ref": { "type": "string", "minLength": 1 },
+    "key_size_bits": { "type": "integer", "enum": [128, 256] },
+    "nonce_bytes": { "type": "integer", "const": 12 },
+    "tag_bytes": { "type": "integer", "const": 16 }
+  },
+  "required": ["algorithm", "key_ref", "key_size_bits", "nonce_bytes", "tag_bytes"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "AES-GCM-SIV", "key_ref": "vault://keys/service-data", "key_size_bits": 256, "nonce_bytes": 12, "tag_bytes": 16 }]
+}

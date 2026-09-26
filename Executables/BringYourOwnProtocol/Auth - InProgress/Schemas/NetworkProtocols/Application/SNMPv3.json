@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/network/snmpv3.json",
+  "title": "SNMPv3 manager configuration",
+  "description": "SNMPv3 configuration using authenticated and encrypted USM messages.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "SNMPv3" },
+    "agent": { "type": "string", "minLength": 1 },
+    "port": { "type": "integer", "const": 161 },
+    "security_level": { "const": "authPriv" },
+    "username": { "type": "string", "minLength": 1 },
+    "authentication_protocol": { "type": "string", "enum": ["SHA-256", "SHA-384", "SHA-512"] },
+    "authentication_key_ref": { "type": "string", "minLength": 1 },
+    "privacy_protocol": { "type": "string", "enum": ["AES-128", "AES-192", "AES-256"] },
+    "privacy_key_ref": { "type": "string", "minLength": 1 }
+  },
+  "required": ["protocol", "agent", "port", "security_level", "username", "authentication_protocol", "authentication_key_ref", "privacy_protocol", "privacy_key_ref"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "SNMPv3", "agent": "switch.example.net", "port": 161, "security_level": "authPriv", "username": "monitoring", "authentication_protocol": "SHA-256", "authentication_key_ref": "vault://snmp/auth-key", "privacy_protocol": "AES-256", "privacy_key_ref": "vault://snmp/privacy-key" }]
+}

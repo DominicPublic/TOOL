@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/generic-protocol.json",
+  "title": "Generic protocol configuration",
+  "description": "Extensible common envelope for protocol configurations. Prefer a protocol-specific schema when one is available.",
+  "type": "object",
+  "$defs": {
+    "endpoint": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "role": { "type": "string", "minLength": 1 },
+        "uri": { "type": "string", "format": "uri" },
+        "host": { "type": "string", "minLength": 1 },
+        "port": { "type": "integer", "minimum": 1, "maximum": 65535 },
+        "transport": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": true
+    },
+    "securityProfile": {
+      "type": "object",
+      "properties": {
+        "authentication": { "type": ["string", "object", "array"] },
+        "encryption": { "type": ["string", "object", "array"] },
+        "integrity": { "type": ["string", "object", "array"] },
+        "credential_refs": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "verify_peer": { "type": "boolean" }
+      },
+      "additionalProperties": true
+    }
+  },
+  "properties": {
+    "name": { "type": "string", "minLength": 1 },
+    "vendor": { "type": "string", "minLength": 1 },
+    "protocol": { "type": "string", "minLength": 1 },
+    "algorithm": { "type": "string", "minLength": 1 },
+    "format": { "type": "string", "minLength": 1 },
+    "category": { "type": "string", "minLength": 1 },
+    "layer": { "type": "string", "minLength": 1 },
+    "version": { "type": ["string", "integer"] },
+    "description": { "type": "string" },
+    "endpoints": {
+      "oneOf": [
+        { "type": "array", "items": { "$ref": "#/$defs/endpoint" } },
+        { "type": "object", "additionalProperties": true }
+      ]
+    },
+    "security": { "$ref": "#/$defs/securityProfile" },
+    "parameters": { "type": "object", "additionalProperties": true },
+    "configuration": { "type": "object", "additionalProperties": true }
+  },
+  "anyOf": [
+    { "required": ["protocol"] },
+    { "required": ["algorithm"] },
+    { "required": ["format"] },
+    { "required": ["name"] }
+  ],
+  "additionalProperties": true,
+  "examples": [
+    {
+      "protocol": "CustomTransport",
+      "category": "network",
+      "layer": "transport",
+      "version": "1.0",
+      "endpoints": [{ "role": "server", "host": "service.example.net", "port": 9000, "transport": "TCP" }],
+      "security": { "authentication": "mutual-tls", "verify_peer": true, "credential_refs": ["vault://certs/service"] },
+      "parameters": { "window_size": 128, "vendor_option": { "enabled": true } }
+    },
+    {
+      "algorithm": "Example-Signature",
+      "category": "signature",
+      "version": "1",
+      "parameters": { "key_ref": "vault://keys/signing-key" }
+    }
+  ]
+}
