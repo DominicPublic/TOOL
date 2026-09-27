@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/compression/lz4.json",
+  "title": "LZ4 compression configuration",
+  "description": "LZ4 frame compression settings. Decompression consumers should enforce output size and expansion-ratio limits.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "LZ4" },
+    "mode": { "type": "string", "enum": ["fast", "high-compression"] },
+    "level": { "type": "integer", "minimum": 1, "maximum": 12 },
+    "block_independence": { "type": "boolean" },
+    "content_checksum": { "type": "boolean" }
+  },
+  "required": ["algorithm", "mode"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "LZ4", "mode": "fast", "block_independence": true, "content_checksum": true }]
+}

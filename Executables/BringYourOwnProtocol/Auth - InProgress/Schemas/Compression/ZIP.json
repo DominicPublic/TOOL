@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/compression/zip.json",
+  "title": "ZIP archive configuration",
+  "description": "ZIP archive settings. ZIP is a container format; validate entry paths and enforce decompressed-size limits when extracting untrusted archives.",
+  "type": "object",
+  "properties": {
+    "format": { "const": "ZIP" },
+    "compression_method": { "type": "string", "enum": ["store", "deflate", "deflate64", "bzip2", "lzma", "zstandard"] },
+    "level": { "type": "integer", "minimum": 0, "maximum": 9 },
+    "zip64": { "type": "boolean" },
+    "data_descriptor": { "type": "boolean" }
+  },
+  "required": ["format", "compression_method"],
+  "additionalProperties": false,
+  "examples": [{ "format": "ZIP", "compression_method": "deflate", "level": 6, "zip64": true }]
+}

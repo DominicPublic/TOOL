@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/compression/bzip2.json",
+  "title": "bzip2 compression configuration",
+  "description": "bzip2 block-sorting compression settings. Decompression consumers should enforce output size and expansion-ratio limits.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "bzip2" },
+    "block_size_100k": { "type": "integer", "minimum": 1, "maximum": 9 },
+    "work_factor": { "type": "integer", "minimum": 0, "maximum": 250 }
+  },
+  "required": ["algorithm", "block_size_100k"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "bzip2", "block_size_100k": 9 }]
+}

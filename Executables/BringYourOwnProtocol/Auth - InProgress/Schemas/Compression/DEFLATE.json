@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/compression/deflate.json",
+  "title": "DEFLATE compression configuration",
+  "description": "DEFLATE stream configuration. Decompression consumers should enforce output size and expansion-ratio limits.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "DEFLATE" },
+    "level": { "type": "integer", "minimum": 0, "maximum": 9 },
+    "container": { "type": "string", "enum": ["raw", "zlib", "gzip"] }
+  },
+  "required": ["algorithm", "level", "container"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "DEFLATE", "level": 6, "container": "gzip" }]
+}

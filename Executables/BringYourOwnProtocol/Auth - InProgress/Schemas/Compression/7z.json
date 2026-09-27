@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/compression/7z.json",
+  "title": "7z archive configuration",
+  "description": "7z archive settings. Validate entry paths and enforce decompressed-size and memory limits when extracting untrusted archives.",
+  "type": "object",
+  "properties": {
+    "format": { "const": "7z" },
+    "method": { "type": "string", "enum": ["Copy", "LZMA", "LZMA2", "PPMd", "BZip2", "Deflate"] },
+    "level": { "type": "integer", "minimum": 0, "maximum": 9 },
+    "solid": { "type": "boolean" },
+    "dictionary_bytes": { "type": "integer", "minimum": 4096 }
+  },
+  "required": ["format", "method"],
+  "additionalProperties": false,
+  "examples": [{ "format": "7z", "method": "LZMA2", "level": 6, "solid": true, "dictionary_bytes": 67108864 }]
+}

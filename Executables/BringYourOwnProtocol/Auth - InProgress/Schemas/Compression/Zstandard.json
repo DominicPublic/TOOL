@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/compression/zstandard.json",
+  "title": "Zstandard compression configuration",
+  "description": "Zstandard frame settings. Decompression consumers should enforce output size and expansion-ratio limits.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "Zstandard" },
+    "level": { "type": "integer", "minimum": -7, "maximum": 22 },
+    "checksum": { "type": "boolean" },
+    "content_size": { "type": "boolean" },
+    "dictionary_ref": { "type": "string", "minLength": 1 }
+  },
+  "required": ["algorithm", "level"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "Zstandard", "level": 3, "checksum": true, "content_size": true }]
+}

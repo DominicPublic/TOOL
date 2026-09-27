@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.com/schemas/generic-protocol.json",
   "title": "Generic protocol configuration",
-  "description": "Extensible common envelope for protocol configurations. Prefer a protocol-specific schema when one is available.",
+  "description": "Extensible common envelope for protocol configurations, including optional compression settings. Prefer a protocol-specific schema when one is available.",
   "type": "object",
   "$defs": {
     "endpoint": {
@@ -27,6 +27,24 @@
         "verify_peer": { "type": "boolean" }
       },
       "additionalProperties": true
+    },
+    "compressionProfile": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "algorithm": {
+          "oneOf": [
+            { "type": "string", "minLength": 1 },
+            { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+          ]
+        },
+        "format": { "type": "string", "minLength": 1 },
+        "level": { "type": "integer", "minimum": -7, "maximum": 22 },
+        "dictionary_ref": { "type": "string", "minLength": 1 },
+        "decompressed_size_limit_bytes": { "type": "integer", "minimum": 1 },
+        "expansion_ratio_limit": { "type": "number", "exclusiveMinimum": 0 }
+      },
+      "additionalProperties": true
     }
   },
   "properties": {
@@ -46,6 +64,7 @@
       ]
     },
     "security": { "$ref": "#/$defs/securityProfile" },
+    "compression": { "$ref": "#/$defs/compressionProfile" },
     "parameters": { "type": "object", "additionalProperties": true },
     "configuration": { "type": "object", "additionalProperties": true }
   },
@@ -64,6 +83,7 @@
       "version": "1.0",
       "endpoints": [{ "role": "server", "host": "service.example.net", "port": 9000, "transport": "TCP" }],
       "security": { "authentication": "mutual-tls", "verify_peer": true, "credential_refs": ["vault://certs/service"] },
+      "compression": { "enabled": true, "algorithm": "Zstandard", "level": 3, "decompressed_size_limit_bytes": 67108864, "expansion_ratio_limit": 100 },
       "parameters": { "window_size": 128, "vendor_option": { "enabled": true } }
     },
     {

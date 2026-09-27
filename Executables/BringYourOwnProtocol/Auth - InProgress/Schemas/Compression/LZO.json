@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/compression/lzo.json",
+  "title": "LZO compression configuration",
+  "description": "LZO-family low-latency compression settings. Decompression consumers should enforce output size and expansion-ratio limits.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "LZO" },
+    "variant": { "type": "string", "enum": ["LZO1X", "LZO1Y", "LZO1Z", "LZO2A"] },
+    "level": { "type": "integer", "minimum": 1, "maximum": 9 }
+  },
+  "required": ["algorithm", "variant"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "LZO", "variant": "LZO1X", "level": 1 }]
+}

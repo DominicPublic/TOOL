@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/compression/zlib.json",
+  "title": "zlib stream configuration",
+  "description": "zlib framing with a DEFLATE payload. Decompression consumers should enforce output size and expansion-ratio limits.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "zlib" },
+    "level": { "type": "integer", "minimum": 0, "maximum": 9 },
+    "dictionary_ref": { "type": "string", "minLength": 1 },
+    "window_bits": { "type": "integer", "minimum": 8, "maximum": 15 }
+  },
+  "required": ["algorithm", "level"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "zlib", "level": 6, "window_bits": 15 }]
+}

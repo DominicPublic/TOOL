@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/compression/xz.json",
+  "title": "XZ stream configuration",
+  "description": "XZ container settings using LZMA-family filters. Decompression consumers should enforce output size, memory, and processing-time limits.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "XZ" },
+    "preset": { "type": "integer", "minimum": 0, "maximum": 9 },
+    "check": { "type": "string", "enum": ["none", "CRC32", "CRC64", "SHA256"] },
+    "threads": { "type": "integer", "minimum": 1 },
+    "dictionary_bytes": { "type": "integer", "minimum": 4096 }
+  },
+  "required": ["algorithm", "preset"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "XZ", "preset": 6, "check": "CRC64", "threads": 2 }]
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/compression/hpack.json",
+  "title": "HPACK header compression configuration",
+  "description": "HTTP/2 header compression settings. Keep dynamic table limits bounded and consistent with peer settings.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "HPACK" },
+    "maximum_dynamic_table_size": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+    "huffman_coding": { "type": "boolean" }
+  },
+  "required": ["protocol", "maximum_dynamic_table_size"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "HPACK", "maximum_dynamic_table_size": 4096, "huffman_coding": true }]
+}

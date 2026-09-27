@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/compression/snappy.json",
+  "title": "Snappy compression configuration",
+  "description": "Snappy stream or framed-stream configuration. Decompression consumers should enforce output size and expansion-ratio limits.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "Snappy" },
+    "format": { "type": "string", "enum": ["raw", "framed"] }
+  },
+  "required": ["algorithm", "format"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "Snappy", "format": "framed" }]
+}

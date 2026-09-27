@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/compression/qpack.json",
+  "title": "QPACK header compression configuration",
+  "description": "HTTP/3 header compression settings. Bound dynamic-table capacity and blocked streams to limit memory use and head-of-line blocking.",
+  "type": "object",
+  "properties": {
+    "protocol": { "const": "QPACK" },
+    "maximum_table_capacity": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+    "blocked_streams": { "type": "integer", "minimum": 0, "maximum": 4294967295 }
+  },
+  "required": ["protocol", "maximum_table_capacity", "blocked_streams"],
+  "additionalProperties": false,
+  "examples": [{ "protocol": "QPACK", "maximum_table_capacity": 4096, "blocked_streams": 16 }]
+}

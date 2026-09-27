@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/compression/brotli.json",
+  "title": "Brotli compression configuration",
+  "description": "Brotli compression settings. Decompression consumers should enforce output size and expansion-ratio limits.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "Brotli" },
+    "quality": { "type": "integer", "minimum": 0, "maximum": 11 },
+    "window_bits": { "type": "integer", "minimum": 10, "maximum": 24 }
+  },
+  "required": ["algorithm", "quality"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "Brotli", "quality": 5, "window_bits": 22 }]
+}

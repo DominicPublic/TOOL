@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/compression/lzma.json",
+  "title": "LZMA compression configuration",
+  "description": "LZMA1 encoder settings. Decompression consumers should enforce output size, memory, and processing-time limits.",
+  "type": "object",
+  "properties": {
+    "algorithm": { "const": "LZMA" },
+    "preset": { "type": "integer", "minimum": 0, "maximum": 9 },
+    "dictionary_bytes": { "type": "integer", "minimum": 4096 },
+    "lc": { "type": "integer", "minimum": 0, "maximum": 4 },
+    "lp": { "type": "integer", "minimum": 0, "maximum": 4 },
+    "pb": { "type": "integer", "minimum": 0, "maximum": 4 }
+  },
+  "required": ["algorithm", "preset"],
+  "additionalProperties": false,
+  "examples": [{ "algorithm": "LZMA", "preset": 6, "dictionary_bytes": 8388608, "lc": 3, "lp": 0, "pb": 2 }]
+}
